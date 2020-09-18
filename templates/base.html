@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <link href="{%static 'home.css'%}" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iAssist</title>
+</head>
+
+<body class="body-img">
+  <div class="mx-2 my-2">
+    <div class="container-fluid">
+      <div class="row" style="background-color: rgb(0, 0, 0)">
+        <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
+          iAssist
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-6 my-3">
+          <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Status</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li>
+              <a href="#">Graph</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-secondary" action="home.html">login</button>
+          <button class="btn btn-secondary" action="home.html">
+            sign up
+          </button>
+        </div>
+      </div>
+      <div class="row" style="background-color: rgb(0, 0, 0)">
+        <br />
+      </div>
+      <div class="row" style="background-color: grey">
+        <br />
+      </div>
+    </div>
+  </div>
+  {%block content%} {%endblock%}
+  <div class="footer" style="background-color: aqua">
+    <ul>
+      <li>contact :</li>
+      <li>email :</li>
+      <li>address :</li>
+    </ul>
+  </div>
+</body>
+
+</html>

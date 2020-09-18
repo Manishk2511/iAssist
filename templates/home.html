@@ -1,0 +1,122 @@
+{%extends 'base.html'%} {%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <link href="{%static 'home.css'%}" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iAssist</title>
+</head>
+
+<body background="cyan">
+  {%block content%}
+  <div class="home">
+    <!-- <div class="container-fluid"> -->
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+        <ul>
+          <li>
+            <a href="#" class="zoom">
+              <img src="{%static 'hp2.png'%}" height="160px" width="160px" />
+            </a>
+          </li>
+        </ul>
+        <br />
+        <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px">Hospital</h4>
+      </div>
+      <div class="col-sm-3">
+        <ul>
+          <li>
+            <a href="#" class="zoom">
+              <img src="{%static 'gbg1.png'%}" height="160px" width="160px" />
+            </a>
+          </li>
+        </ul>
+        <br />
+        <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px">Garbage</h4>
+      </div>
+      <div class="col-sm-3">
+        <ul>
+          <li>
+            <a href="#" class="zoom">
+              <img src="{%static 'rd1.png'%}" height="160px" width="160px" />
+            </a>
+          </li>
+        </ul>
+        <br />
+        <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px">Road</h4>
+      </div>
+    </div>
+    <br />
+    <div class="row"><br /></div>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+        <ul>
+          <li>
+            <a href="#" class="zoom">
+              <img src="{%static 'wt1.png'%}" height="160px" width="160px" />
+            </a>
+          </li>
+        </ul>
+        <br />
+        <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px"">Water</h4>
+      </div>
+      <div class=" col-sm-3">
+          <ul>
+            <li>
+              <a href="#" class="zoom">
+                <img src="{%static 'el1.png'%}" height="160px" width="160px" />
+              </a>
+            </li>
+          </ul>
+          <br />
+          <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px"">Electricity</h4>
+      </div>
+      <div class=" col-sm-3">
+            <ul>
+              <li>
+                <a href="#" class="zoom">
+                  <img src="{%static 'ed1.png'%}" height="160px" width="160px" />
+                </a>
+              </li>
+            </ul>
+            <br />
+            <h4 style="display: block; background-color:grey; color:white; text-align:center
+        ;width:max-content;
+        margin:0px 0px 0px 40px;
+        padding:8px"">Education</h4>
+      </div>
+      <!-- </div> -->
+    </div>
+    <div class=" row">
+              <br />
+              <br />
+              <br />
+      </div>
+    </div>
+    {%endblock%}
+</body>
+
+</html>

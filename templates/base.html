@@ -21,17 +21,19 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-6 my-3">
           <ul>
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">Status</a></li>
-            <li><a href="#">Feedback</a></li>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="status">Status</a></li>
+            <li><a href="feedback">Feedback</a></li>
             <li>
-              <a href="#">Graph</a>
+              <a href="stats">Graph</a>
             </li>
+            <li><a href="ratings">Ratings</a></li>
+            <li><a href="map">Map</a></li>
           </ul>
         </div>
         <div class="col-sm-3">
-          <button class="btn btn-secondary" action="home.html">login</button>
-          <button class="btn btn-secondary" action="home.html">
+          <button class="btn btn-secondary" onclick="window.location.href='account/login'">login</button>
+          <button class="btn btn-secondary" onclick="window.location.href='/account/signup'">
             sign up
           </button>
         </div>

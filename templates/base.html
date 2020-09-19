@@ -12,47 +12,52 @@
 </head>
 
 <body class="body-img">
-  <div class="mx-2 my-2">
-    <div class="container-fluid">
-      <div class="row" style="background-color: rgb(0, 0, 0)">
-        <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
-          iAssist
+  <div class="blur">
+    <div class="mx-2 my-2">
+      <div class="container-fluid">
+        <div class="row" style="background-color: rgb(0, 0, 0)">
+          <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
+            iAssist
+          </div>
+          <div class="col-sm-4"></div>
+          <div class="col-sm-6 my-3">
+            <ul>
+              <li><a href="/" class="active">Home</a></li>
+              <li><a href="status">Status</a></li>
+              <li><a href="feedback">Feedback</a></li>
+              <li>
+                <a href="stats">Graph</a>
+              </li>
+              <li><a href="ratings">Ratings</a></li>
+              <li><a href="map">Map</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <button class="btn btn-secondary" onclick="window.location.href='account/login'">login</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/account/signup'">
+              sign up
+            </button>
+          </div>
         </div>
-        <div class="col-sm-4"></div>
-        <div class="col-sm-6 my-3">
-          <ul>
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="status">Status</a></li>
-            <li><a href="feedback">Feedback</a></li>
-            <li>
-              <a href="stats">Graph</a>
-            </li>
-            <li><a href="ratings">Ratings</a></li>
-            <li><a href="map">Map</a></li>
-          </ul>
+        <div class="row" style="background-color: rgb(0, 0, 0)">
+          <br />
         </div>
-        <div class="col-sm-3">
-          <button class="btn btn-secondary" onclick="window.location.href='account/login'">login</button>
-          <button class="btn btn-secondary" onclick="window.location.href='/account/signup'">
-            sign up
-          </button>
+        <div class="row" style="background-color: grey">
+          <br />
         </div>
-      </div>
-      <div class="row" style="background-color: rgb(0, 0, 0)">
-        <br />
-      </div>
-      <div class="row" style="background-color: grey">
-        <br />
       </div>
     </div>
   </div>
   {%block content%} {%endblock%}
-  <div class="footer" style="background-color: aqua">
+  <div class="footer" style="background-color: black">
+    <br>
     <ul>
-      <li>contact :</li>
-      <li>email :</li>
-      <li>address :</li>
+      <li style="color:white">contact :</li><br>
+      <li style="color:white">email :</li><br>
+      <li style="color:white">address :</li><br>
     </ul>
+    <br>
+    <h4 style="text-align: center; background-color:rgb(5, 65, 110)">WE ASSIST INDIA</h4>
   </div>
 </body>
 

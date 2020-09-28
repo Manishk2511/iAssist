@@ -4,4 +4,4 @@ from . import views
 
 
 def feedback(request):
-    return render(request, 'feedback.html')
+    return render(request, 'feedback.html', {'value': "feedback"})

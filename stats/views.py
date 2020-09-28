@@ -4,4 +4,4 @@ from . import views
 
 
 def stats(request):
-    return render(request, 'statistics.html')
+    return render(request, 'statistics.html', {'value': "stats"})

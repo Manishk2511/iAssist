@@ -1,64 +1,96 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link href="{%static 'home.css'%}" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iAssist</title>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-  <link href="{%static 'home.css'%}" rel="stylesheet" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iAssist</title>
-</head>
-
-<body class="body-img">
-  <div class="blur">
-    <div class="mx-2 my-2">
-      <div class="container-fluid">
-        <div class="row" style="background-color: rgb(0, 0, 0)">
-          <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
-            iAssist
+  <body class="body-img">
+    <div class="blur">
+      <div class="mx-2 my-2">
+        <div class="container-fluid">
+          <div class="row" style="background-color: rgb(0, 0, 0)">
+            <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
+              iAssist
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6 my-3">
+              <ul>
+                {% if value == "home" %}
+                <li><a href="/" class="active">Home</a></li>
+                {%else%}
+                <li><a href="/">Home</a></li>
+                {%endif%} {% if value == "status" %}
+                <li><a href="status" class="active">Status</a></li>
+                {%else%}
+                <li><a href="status">Status</a></li>
+                {%endif%} {% if value == "feedback" %}
+                <li><a href="feedback" class="active">Feedback</a></li>
+                {%else%}
+                <li><a href="feedback">Feedback</a></li>
+                {%endif%} {% if value == "stats" %}
+                <li><a href="stats" class="active">Graph</a></li>
+                {%else%}
+                <li><a href="stats">Graph</a></li>
+                {%endif%} {% if value == "ratings" %}
+                <li><a href="ratings" class="active">Ratings</a></li>
+                {%else%}
+                <li><a href="ratings">Ratings</a></li>
+                {%endif%}{% if value == "map" %}
+                <li><a href="map" class="active">Map</a></li>
+                {%else%}
+                <li><a href="map">Map</a></li>
+                {%endif%}
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <button
+                class="btn btn-secondary"
+                onclick="window.location.href='account/login'"
+              >
+                login
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="window.location.href='/account/signup'"
+              >
+                sign up
+              </button>
+            </div>
           </div>
-          <div class="col-sm-4"></div>
-          <div class="col-sm-6 my-3">
-            <ul>
-              <li><a href="/" class="active">Home</a></li>
-              <li><a href="status">Status</a></li>
-              <li><a href="feedback">Feedback</a></li>
-              <li>
-                <a href="stats">Graph</a>
-              </li>
-              <li><a href="ratings">Ratings</a></li>
-              <li><a href="map">Map</a></li>
-            </ul>
+          <div class="row" style="background-color: rgb(0, 0, 0)">
+            <br />
           </div>
-          <div class="col-sm-3">
-            <button class="btn btn-secondary" onclick="window.location.href='account/login'">login</button>
-            <button class="btn btn-secondary" onclick="window.location.href='/account/signup'">
-              sign up
-            </button>
+          <div class="row" style="background-color: grey">
+            <br />
           </div>
-        </div>
-        <div class="row" style="background-color: rgb(0, 0, 0)">
-          <br />
-        </div>
-        <div class="row" style="background-color: grey">
-          <br />
         </div>
       </div>
     </div>
-  </div>
-  {%block content%} {%endblock%}
-  <div class="footer" style="background-color: black">
-    <br>
-    <ul>
-      <li style="color:white">contact :</li><br>
-      <li style="color:white">email :</li><br>
-      <li style="color:white">address :</li><br>
-    </ul>
-    <br>
-    <h4 style="text-align: center; background-color:rgb(5, 65, 110)">WE ASSIST INDIA</h4>
-  </div>
-</body>
-
+    {%block content%} {%endblock%}
+    <div class="footer" style="background-color: black">
+      <br />
+      <ul>
+        <li style="color: white">contact :</li>
+        <br />
+        <li style="color: white">email :</li>
+        <br />
+        <li style="color: white">address :</li>
+        <br />
+      </ul>
+      <br />
+      <h4 style="text-align: center; background-color: rgb(5, 65, 110)">
+        WE ASSIST INDIA
+      </h4>
+    </div>
+  </body>
 </html>

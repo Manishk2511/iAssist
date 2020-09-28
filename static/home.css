@@ -10,12 +10,12 @@ li {
   float: left;
 }
 
-li a {
+li a{
   display: block;
   color: white;
   text-align: center;
   padding: 5px 5px;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 li a:hover {
@@ -90,18 +90,19 @@ li a:hover {
     
 }
 
-
+/* 
 .blur {
   background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1
   backdrop-filter: blur(8px); // This be the blur
   height: 100vh;
 	width: 100%;
-}
+} */
 
 
 .home{
   /* background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1 */
-  backdrop-filter: blur(5px); // This be the blur
+  backdrop-filter: blur(5px);
+   /* // This be the blur */
   /* height: 100vh;
 	width: 50%; */
 }

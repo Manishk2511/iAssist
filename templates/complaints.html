@@ -4,6 +4,8 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaints</title>
@@ -11,6 +13,31 @@
 
 <body>
     {%block content%}
+    <div class="container-fluid"></div>
+        <div class="complaint-form" style="background-color:lightseagreen; padding: 70px">
+            <div class="row padding margin">
+                <div class="col">
+            <form>
+                <div class="problem-label" style="margin : 10px 3px;">Problem :</div>
+                <div class="problem-box">
+                <input type="text" name='problem'>
+                </div>
+                <div class="area-label" style="margin : 10px 3px;">Area :</div>
+                <div class="area-box">
+                <input type="text" name='area'>
+                </div>
+                <div class="pincode-label" style="margin : 10px 3px;">Pincode :</div>
+                <div class="pincode-box">
+                <input type="text" name='pincode' maxlength="500">
+                </div>
+                <div class="submit-btn" style="margin: 20px">
+                    <button type="button" class="btn btn-light btn-sm" style="color:aliceblue;"><a href="#" class="">Submit</a></button>
+                </div>
+            </form>
+        </div>
+        </div>
+        </div>
+    </div>
     {%endblock%}
 </body>
 

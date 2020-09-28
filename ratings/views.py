@@ -4,4 +4,4 @@ from . import views
 
 
 def ratings(request):
-    return render(request, 'ratings.html')
+    return render(request, 'ratings.html', {'value': "ratings"})

@@ -4,4 +4,4 @@ from . import views
 
 
 def status(request):
-    return render(request, 'status.html')
+    return render(request, 'status.html', {'value': "status"})

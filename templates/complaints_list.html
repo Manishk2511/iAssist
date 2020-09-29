@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>complaints-list</title>
+  </head>
+  <body>
+    {%block content%}
+    <div class="container-fluid">
+      <div class="col-md-10 offset-md-1 mt-5">
+        <div class="jumbotron">
+          <h1 class="display-4">Complaints list</h1>
+          <table class="table table-borderless">
+            <thead class="border-bottom font-weight-bold">
+              <tr>
+                <td>Problem</td>
+                <td>Description</td>
+                <td>Area</td>
+                <td>Pincode</td>
+                <td>
+                  <a href="{% url 'complaint_insert'%}" class="btn btn-success"
+                    >Add New</a
+                  >
+                </td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for complaint in complaints_list%}
+              <tr>
+                <td>{{complaint.problem}}</td>
+                <td>{{complaint.desciption}}</td>
+                <td>{{complaint.area}}</td>
+                <td>{{complaint.pincode}}</td>
+                <td>
+                  <a
+                    href="{% url 'complaint_update' complaint.id%}"
+                    class="btn btn-secondary"
+                  >
+                    Edit
+                  </a>
+                  <form
+                    action="{% url 'complaint_delete' complaint.id %}"
+                    method="post"
+                    class="d-inline"
+                  >
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <hr class="my-4" />
+        </div>
+      </div>
+    </div>
+    {%endblock%}
+  </body>
+</html>

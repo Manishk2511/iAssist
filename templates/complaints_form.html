@@ -24,11 +24,11 @@
   </head>
   <body>
     {%block content%}
-    <div class="container-fluid">
+    <div class="container-fluid"></div>
       <div class="col-md-10 offset-md-1 mt-5">
         <div class="jumbotron">
           <h1 class="display-4">Complaint</h1>
-          <p class="lead font-italic">Share your problems here.</p>
+          <p class="lead font-italic">Share your problems here</p>
           <hr class="my-4" />
           <form action="" method="post" autocomplete="off">
             {%csrf_token%} {{form.problem|as_crispy_field}}

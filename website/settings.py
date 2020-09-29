@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'u*!(@8fhn49x77y0o8b$@&j23hr31za(p5)@!z4nvmbm5h$z-z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://i-assist.herokuapp.com',
                  'herokuapp.com', '127.0.0.1']
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'stats',
     'status',
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

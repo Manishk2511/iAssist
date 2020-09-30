@@ -104,8 +104,13 @@ DATABASES = {
 }
 
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist')
+DATABASES['default'] = dj_database_url.parse(
+    'postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist', conn_max_age=600)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

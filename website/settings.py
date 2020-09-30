@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'iAssist',
         'USER':  'postgres',
         'PASSWORD': 'manish25',
@@ -104,12 +104,12 @@ DATABASES = {
 }
 
 
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=600, ssl_require=True)
-DATABASES['default'] = dj_database_url.config(
-    default='postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist')
-DATABASES['default'] = dj_database_url.parse(
-    'postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist', conn_max_age=600)
+# DATABASES['default'] = dj_database_url.config(
+#     conn_max_age=600, ssl_require=True)
+# DATABASES['default'] = dj_database_url.config(
+#     default='postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist')
+# DATABASES['default'] = dj_database_url.parse(
+#     'postgres://postgres:manish25@iassist.csira7ezkk8k.eu-west-1.rds.amazonaws.com:5432/iAssist', conn_max_age=600)
 
 
 # Password validation

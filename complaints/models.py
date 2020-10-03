@@ -14,4 +14,4 @@ class complaint(models.Model):
     problem = models.ForeignKey(problem, on_delete=models.CASCADE)
     desciption = models.TextField()
     area = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=100)
+    pincode = models.CharField(max_length=8)

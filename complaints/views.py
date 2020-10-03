@@ -10,8 +10,8 @@ def complaints(request):
 
 
 def complaints_list(request):
-    context = {'complaints_list': complaint.objects.all()}
-    return render(request, 'complaints_list.html', context)
+    complaints_list = complaint.objects.all()
+    return render(request, 'complaints_list.html', {'complaints_list': complaints_list, 'value': "status"})
 
 
 def complaints_form(request, id=0):

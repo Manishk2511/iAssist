@@ -12,7 +12,7 @@ def feedback(request, id=0):
         else:
             feedback = Feedback.objects.get(pk=id)
             form = FeedbackForm(instance=feedback)
-        return render(request, 'feedback_form.html', {'form': form})
+        return render(request, 'feedback_form.html', {'form': form, 'value': "feedback"})
     else:
         if id == 0:
             form = FeedbackForm(request.POST)
@@ -25,8 +25,8 @@ def feedback(request, id=0):
 
 
 def feedbackList(request):
-    context = {'feedback_list': Feedback.objects.all()}
-    return render(request, 'feedback_list.html', context)
+    feedback_list = Feedback.objects.all()
+    return render(request, 'feedback_list.html', {'value': "feedback", 'feedback_list': feedback_list})
 
 
 def feedbackDelete(request, id):

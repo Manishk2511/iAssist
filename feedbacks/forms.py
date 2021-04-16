@@ -1,10 +1,10 @@
 from django import forms
-from .models import Feedback, problem
+from .models import Feedback_list, problem
 
 
 class FeedbackForm(forms.ModelForm):
     class Meta:
-        model = Feedback
+        model = Feedback_list
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

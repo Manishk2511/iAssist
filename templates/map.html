@@ -1,17 +1,96 @@
-{%extends 'base.html'%}
-{%load static%}
+{% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <title>Simple Markers</title>
+    {% block content %}
+    <div class="p-3"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map</title>
-</head>
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      function initMap() {
+        const myLatLng = { lat: 23.0225, lng: 72.5714 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: myLatLng,
+        });
+        $(function() {
+          var icon = {
+            url: "{% static 'icon3.png' %}", // url
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+        {% for location in locations %}
+          {%for item in complaints %}
+          {% if item.id == location.complaint_id%}
+            var marker = new google.maps.Marker({
+            position: {lat:Number({{location.latitude}}),lng:Number({{location.longitude}})},
+            map,
+            animation: google.maps.Animation.DROP,
+            title: "Complaint Id : {{item.id}} \n Problem Facing : {{item.problem}}\n Problem Description : {{item.desciption}} ",
+            icon:icon,
+           
+          });
+          
+          var image_str = "/media/{{item.image}}"
+          marker.info = new google.maps.InfoWindow({
+            content: '<div id="content">' +
+              '<div id="siteNotice">' +
+              "</div>" +
+              '<h1 id="firstHeading" class="firstHeading"> {{item.problem}} complaint</h1>' +
+              '<div id="bodyContent">' +
+              "<p>{{item.desciption}}</p>" +
+              '<img src="/media/{{item.image}}" height="250px" width="250px" style="border: 5px solid black;">'+'<br>'+
+              '<p>See full complaint <a href="/complaints/view_complaint/{{item.id}}/">' +
+              "here</a><br><br>" +
+              "powered by <b>iAssist</b>" +
+              "</div>" +
+              "</div>",
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            this.info.open(map, this);
+          });
+         
+          {%endif%}
+        {%endfor%}
+        {%endfor%}
+        
+       
+        
 
-<body>
-    {%block content%}
-    {%endblock%}
-</body>
+      });
+      
+
+    }
+    </script>
+  </head>
+  <body>
+      
+    <div id="map" style="margin:50px 20px 20px 20px"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS-d5dC7YyDDgubxhMAf9178mkADgmnYQ&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+  {% endblock %}
 
 </html>

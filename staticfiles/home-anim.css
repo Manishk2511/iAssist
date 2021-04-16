@@ -1,0 +1,86 @@
+#nav-container {
+  height: 100%;
+  position: relative;
+}
+
+/*Dot nav  inspired from [Stephan Rusu](https://codepen.io/stephanrusu/)'s Pen [One Page Scroll](https://codepen.io/stephanrusu/pen/FJzfb/) */
+
+.dotnav-right {
+  right: 10px;
+  top: 50%;
+  margin-top: -50px;
+  height: 100px;
+  z-index: 10;
+  position: fixed;
+}
+
+.dotnav {
+  padding: 0;
+  list-style: none;
+  font-size: 0.001px;
+}
+
+.dotnav > li {
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top;
+}
+
+.dotnav > li:nth-child(n + 2) {
+  margin-left: 15px;
+}
+
+.dotnav > li > a {
+  display: inline-block;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #512da8;
+  vertical-align: top;
+  overflow: hidden;
+  padding: 0;
+  text-indent: -999%;
+}
+
+.dotnav > li > a:hover,
+.dotnav > li > a:focus {
+  background: #512da8;
+  outline: none;
+}
+
+.dotnav > li > a:active {
+  background: #512da8;
+}
+
+.dotnav > li.active > a {
+  background: #512da8;
+}
+
+.dotnav-vertical > li {
+  display: block;
+  margin-right: 10px;
+}
+
+.dotnav-vertical > li:nth-child(n + 2) {
+  margin-left: 0;
+  margin-top: 10px;
+}
+
+.nav-tooltip + .tooltip > .tooltip-inner {
+  background-color: #512da8;
+  color: #fff;
+  border: 1px solid #512da8;
+}
+
+.nav-tooltip + .tooltip.left > .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #512da8;
+  font-family: "Raleway", sans-serif;
+  font-weight: lighter;
+}

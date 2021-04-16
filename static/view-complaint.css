@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, lightblue 10%, pink 100%);
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  background: linear-gradient(135deg, #950740 10%, #4056a1 100%);
+  box-shadow: 10px 10px 20px black;
+  transition: 0.5s ease-in-out;
+  padding: 1vmax;
+  border-radius: 3vmax;
+  color: white;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.question {
+  font-style: italic;
+  font-weight: bold;
+  color: wheat;
+  padding: 0% 5%;
+}
+
+.answer {
+  color: honeydew;
+  padding: 0% 5%;
+}
+
+#answer-description {
+  text-align: justify;
+}
+
+.img {
+  padding: 0% 2.5%;
+  margin-bottom: 2.5%;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    text-align: center;
+  }
+
+  .img {
+    padding: 0% 5%;
+  }
+}
+
+#track-complaint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin: 1vmax;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  outline: none;
+  font-weight: 600;
+  padding: 1.5vmin;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#track-complaint-button,
+#track-complaint-button:active {
+  color: white;
+  background-color: green;
+}
+
+#track-complaint-button:hover {
+  background-color: darkgreen;
+}
+
+#view-on-map-button,
+#view-on-map-button:active {
+  background-color: lightseagreen;
+  color: white;
+}
+
+#view-on-map-button:hover {
+  background-color: teal;
+}

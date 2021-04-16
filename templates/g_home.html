@@ -1,0 +1,130 @@
+{%extends 'government_base.html' %}
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    {%block content%}
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="{%static 'g_home.css'%}">
+
+        <title>Government</title>
+    </head>
+    
+    <body>
+    
+    
+    <div class="wrapper" style="margin:100px">
+      <div class="table basic" >
+        <div class="price-section">
+          <div class="price-area">
+            <div class="inner-area">
+              <span
+                ><img
+                  src="{% static '/svgs/complain.svg' %}"
+                  alt="Random Name"
+                  style="width: 100%"
+              /></span>
+            </div>
+          </div>
+        </div>
+        <div class="package-name"></div>
+        <ul class="features">
+          <li>
+            <span class="list-name">View all complaints</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Accept/Reject a complaint</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Manage tracking status</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Delete complaint</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+        </ul>
+        <div class="btn" ><button onclick="document.location='/government/g_complaints'">Manage Now</button></div>
+      </div>
+      <div class="table premium">
+        <div class="price-section">
+          <div class="price-area">
+            <div class="inner-area">
+              <span
+                ><img src="{% static '/svgs/map.svg' %}" alt="Random Name" style="width: 100%"
+              /></span>
+            </div>
+          </div>
+        </div>
+        <div class="package-name"></div>
+        <ul class="features">
+          <li>
+            <span class="list-name">Find every complaint on map</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">View exact location</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">View complaint marker</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Details on clicking marker</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+        </ul>
+        <div class="btn" ><button onclick="document.location='/government/g_map'">View Map</button></div>
+      </div>
+      <div class="table ultimate">
+        <div class="price-section">
+          <div class="price-area">
+            <div class="inner-area">
+              <span
+                ><img
+                  src="{% static '/svgs/statistics.svg' %}"
+                  alt="Random Name"
+                  style="width: 100%"
+              /></span>
+            </div>
+          </div>
+        </div>
+        <div class="package-name"></div>
+        <ul class="features">
+          <li>
+            <span class="list-name">Visualize overall statistics</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Visualzie statistics by search</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Search statistics by area</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+          <li>
+            <span class="list-name">Search statistics by category</span>
+            <span class="icon check"><i class="fas fa-check"></i></span>
+          </li>
+        </ul>
+        <div class="btn" ><button onclick="document.location='/government/complaint_stats/'">View Statistics</button></div>
+      </div>
+    </div>
+    {%block scripts%}
+
+    {%endblock scripts%}
+        <!-- <h1> welcome to home</h1> -->
+
+    
+</body>
+{%endblock content%}
+
+</html>

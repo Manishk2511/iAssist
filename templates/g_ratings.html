@@ -1,0 +1,295 @@
+{%extends 'government_base.html'%}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratings</title>
+
+
+</head>
+
+<body>
+{%block content%}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  
+
+
+ 
+
+  .container-fluid {
+    padding: 50px 50px 50px 50px;
+    margin: 30px 50px 50px 0px;
+  }
+  
+  
+  
+  .heading {
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  
+  /* .fa {
+    font-size: 25px;
+  } */
+  
+  .checked {
+    color: orange;
+  }
+  
+  /* Three column layout */
+  .side {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+  }
+  
+  .middle {
+    margin-top: 10px;
+    float: left;
+    width: 70%;
+  }
+  
+  /* Place text to the right */
+  .right {
+    text-align: right;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Individual bars */
+  .bar-5 {
+    width: {{garbage_ratio}}%;
+    height: 18px;
+    background-color: #4caf50;
+  }
+  .bar-4 {
+    width: {{road_ratio}}%;
+    height: 18px;
+    background-color: #2196f3;
+  }
+  .bar-3 {
+    width: {{hospital_ratio}}%;
+    height: 18px;
+    background-color: #00bcd4;
+  }
+  .bar-2 {
+    width: {{electricity_ratio}}%;
+    height: 18px;
+    background-color: #ff9800;
+  }
+  .bar-1 {
+    width: {{water_ratio}}%;
+    height: 18px;
+    background-color: #f44336;
+  }
+  .bar-0 {
+    width: {{education_ratio}}%;
+    height: 18px;
+    background-color: #ff229b;
+  }
+  
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  @media (max-width: 400px) {
+    .side,
+    .middle {
+      width: 100%;
+    }
+    .right {
+      display: none;
+    }
+  }
+ 
+
+</style>
+
+<!-- <link rel="stylesheet" href="{% static 'ratings.css' %}"> -->
+
+<!-- searching city -->
+
+<div class="p-3"></div>
+<div
+        class="w3-black parralax"
+        style="background-image: url('/static/city_ratings_bg-final.jpg');padding:50px;margin:20px"
+      >
+        <div class="w3-row w3-padding-64" id="complaint-section">
+          <div class="w3-center w3-col m6 w3-padding-large w3-hide-small">
+            <!-- <img
+              src="{% static 'svgs/complain.svg'%}"
+              class="w3-round w3-margin-bottom"
+              alt="I have a complaint"
+              style="width: 30%"
+            /> -->
+          </div>
+
+          <div class="w3-col m6 w3-padding-large w3-center">
+            <h1 ><b>CHECK WHAT RATINGS YOUR CITY GOT</b></h1>
+            <h5 ><b>All ratings area based on how much complaints were solved from total complaints received</b></h5>
+            <br />
+            <!-- <a href="/ratings" class="button-style-1" style="text-decoration: none; color: inherit;">Let's see</a> -->
+          </div>
+        </div>
+    <!-- </div>  -->
+  
+  <div class="topnav bg-light  p-4" style="margin:40px 20px 20px 40px;color:blueviolet">
+
+    <h3 style="float:left;">Check ratings of your city</h3>
+
+
+    <div class="search-container bg-light">
+      <form action="/government/ratings/search" method="POST">
+        {% csrf_token %}
+      <!-- <div class="search-button" style="color:black;text-align:left; float:left;margin-right:820px;margin-top:10px;font:sans serif"> Search complaints by area or complaint_id</div> -->
+        <input type="text" placeholder="Enter city here...  " name="querry" id="querry" >
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    </div>
+
+    {% if size == 0 and request.method == "POST" %}
+    <div class="jumbotron" style="color:black;margin:20px 20px 0px 40px;">
+    Your search : <b>{{querry}}</b> did not match any documents.<br>
+   Suggestions :<br>
+   - Try different keywords<br>
+  </div>
+   {% endif %}
+    <!-- diplaying city ratings -->
+
+{% if size != 0 and request.method == "POST" %}
+<div class="jumbotron" style="margin:40px;color:black">
+<b>{{querry}}</b><br>
+<span class="heading">City Rating</span>
+{% if avg_rating > 0 %}
+<span class="fa fa-star checked"></span>
+{% else %}
+<span class="fa fa-star"></span>
+{% endif %}
+{% if avg_rating > 1 %}
+<span class="fa fa-star checked"></span>
+{% else %}
+<span class="fa fa-star"></span>
+{% endif %}
+{% if avg_rating > 2 %}
+<span class="fa fa-star checked"></span>
+{% else %}
+<span class="fa fa-star"></span>
+{% endif %}
+{% if avg_rating > 3 %}
+<span class="fa fa-star checked"></span>
+{% else %}
+<span class="fa fa-star"></span>
+{% endif %}
+{% if avg_rating > 4 %}
+<span class="fa fa-star checked"></span>
+{% else %}
+<span class="fa fa-star"></span>
+{% endif %}
+
+<p>{{avg_rating}} average rating</p>
+<hr style="border:3px solid #f1f1f1">
+
+<div class="row">
+  <div class="side">
+    <div>{{garbage_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Garbage</div>
+  </div>
+  <div class="side">
+    <div>{{road_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Roads</div>
+  </div>
+  <div class="side">
+    <div>{{hospital_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Hospital</div>
+  </div>
+  <div class="side">
+    <div>{{electricity_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Electricity</div>
+  </div>
+  <div class="side">
+    <div>{{water_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Water</div>
+  </div>
+</div>
+<div class="side">
+    <div>{{education_rating}} star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-0"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>Education</div>
+  </div>
+</div>
+
+</div>
+{% else  %}
+<!-- <img src="{% static 'ratings-extra.jpg' %}" style="padding:20px 0px 20px 100px;transparent:"> -->
+{% endif %}
+</div>
+
+{%endblock%}
+
+</body>
+
+</html>

@@ -24,22 +24,40 @@
   </head>
   <body>
     {%block content%}
-    <div class="container">
+    <div class="p-3"></div>
+    <div class="container" style="color:rgba(255, 255, 255, 0.747)">
       <div class="col-md-10 offset-md-1 mt-5">
-        <div class="jumbotron">
+        <div class="jumbotron bg-dark">
           <h1 class="display-4">Complaint</h1>
           <p class="lead font-italic">Share your problems here</p>
           <hr class="my-4" />
-          <form action="" method="post" autocomplete="off">
+          {% if messages %}
+						<ul class="messages">
+							{% for message in messages %}
+							<li  {% if message.tags %} class=" {{ message.tags }} bg-danger text-left card" {% endif %}> {{ message }} </li>
+							{% endfor %}
+						</ul>
+						<br>
+						{% endif %}
+          <!-- <button id = "find-me">Show my location</button><br/> -->
+          <p id = "status"></p>
+          <a id = "map-link" target="_blank"></a>
+          <form enctype="multipart/form-data" action="" method="post" autocomplete="off" >
             {%csrf_token%} {{form.problem|as_crispy_field}}
             {{form.desciption|as_crispy_field}}
             <div class="row">
               <div class="col-md-7">{{form.area|as_crispy_field}}</div>
               <div class="col-md-5">{{form.pincode|as_crispy_field}}</div>
+             
+              <br>
+             <div class="col-md-5">{{form.image|as_crispy_field}}</div>
             </div>
+            <br>
             <div class="row">
               <div class="col-md-8">
                 <button type="submit" class="btn btn-success btn-block btn-lg">
+                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+
                   Submit
                 </button>
               </div>
@@ -48,6 +66,8 @@
                   href="{% url 'list'%}"
                   class="btn btn-secondary btn-block btn-lg"
                 >
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
                   Back to list
                 </a>
               </div>
@@ -56,12 +76,65 @@
         </div>
       </div>
     </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD72EtK5OQWj1ZXJwN5uwOl8A_tnrd_UD4&signed_in=true&callback=initMap">
+    </script>
+
+      {% block jquery %}
+      <script>
+      function geoFindMe() {
+
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+      
+        mapLink.href = '';
+        mapLink.textContent = '';
+      
+        function success(position) {
+          const latitude  = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          var LocalApi="http://maps.googleapis.com/maps/api/geocode/json?Latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=true";
+          $.get({
+            url:LocalApi,
+            success:function(data){
+              console.log(data);
+              console.log(data.results[0].address_components[4].longname);
+            }
+          })
+          status.textContent = '';
+          mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+          mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+        }
+        
+        function error() {
+          status.textContent = 'Unable to retrieve your location';
+        }
+      
+        if(!navigator.geolocation) {
+          status.textContent = 'Geolocation is not supported by your browser';
+        } else {
+          status.textContent = 'Locating…';
+          navigator.geolocation.getCurrentPosition(success, error);
+        }
+      
+      }
+      
+      document.querySelector('#find-me').addEventListener('click', geoFindMe);
+      
+      
+    </script>
+    {% endblock jquery %}
+
     {%endblock%}
+    
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"
-    ></script>
+    >
+    </script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"

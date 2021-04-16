@@ -1,0 +1,224 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous"
+        />
+                <link rel="icon" type="image/png" href="{% static 'icons/icon3.jpg' %}"/>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="{% static 'base.css' %}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <link href="{%static 'government_base.css'%}" rel="stylesheet"/>
+
+
+        
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Government Panel - iAssist</title>
+    </head>
+
+    <body onload="loadThePage()">
+        {% comment %} <div id="preloading" style="background: white url('/static/images/preloader1.gif') no-repeat center;"></div> {% endcomment %}
+        <div id="preloading" style="background: white url('/static/images/preloader2.gif') no-repeat center;"></div>
+        {% comment %} <div id="preloading" style="background: #231f20 url('/static/images/preloader3.gif') no-repeat center;"></div> {% endcomment %}
+        {% comment %} <div id="preloading" style="background: #231f20 url('/static/images/preloader4.gif') no-repeat center; background-size: cover;"></div> {% endcomment %}
+     
+        <!-- Navbar -->
+        <div class="w3-top">
+            <div class="w3-bar w3-indigo w3-card">
+                <a
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+                    href="javascript:void(0)"
+                    onclick="myFunction()"
+                    title="Toggle Navigation Menu"
+                    ><i class="fa fa-bars"></i
+                ></a>
+                
+                <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-deep-purple w3-hover-green"
+                style="text-decoration: none;">HOME</a>
+                <a
+                  href="/government"
+                  class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                  style="text-decoration: none;"
+                  >GOVERNMENT PANEL</a
+                >
+                
+                <a href="/government/g_complaints" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >MANAGE COMPLAINTS</a
+                >
+                <a href="/government/g_map" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >MAP</a
+                >
+                <a href="/government/complaint_stats" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >STATISTICS</a
+                >
+                <a href="/government/ratings" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >RATINGS</a
+                >
+              
+                <a href="/government/area_wise" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >AREA WISE STATISTICS</a
+                >
+                {% if user.is_authenticated %}
+                <div class="w3-bar-item  w3-padding-large w3-hide-small w3-right">
+                  Welcome &nbsp;<i class="fas fa-user-circle"></i>
+                  {{user.username}}
+                  </div>
+                  <a
+                    href="/account/logout"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    style="text-decoration: none;"
+                    >Logout</a
+                  >
+                
+                {% else %}
+                <a
+                    href="/account/signup"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    style="text-decoration: none;"
+                    >SIGN UP</a
+                >
+                <a
+            w3-hover-green        href="/account/login"
+                    style="text-decoration: none;"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    >SIGN IN</a
+                >
+                {% endif %}
+                
+                <a
+                    href="/government/search"
+                    class="w3-padding-large w3-hover-red w3-hide-small w3-right"
+                    ><i class="fa fa-search"></i
+                ></a>
+            </div>
+        </div>
+            
+        <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+        <div>
+          <div
+          id="navDemo"
+          class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+          style="margin-top: 46px"
+          >
+              
+              <a
+                  href="/"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >HOME</a
+              >
+              {% if request.user.is_staff %} 
+                    <a
+                    href="/government"
+                    class="w3-bar-item w3-button w3-padding-large"
+                    style="text-decoration: none;"
+                    onclick="myFunction()"
+                    >GOVERNMENT PANEL</a
+                >
+              {% endif %}
+              <a
+                  href="/complaints/list"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >MY COMPLAINTS</a
+              >
+              <a
+                  href="/map"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >MAP</a
+              >
+              <a
+                  href="/stats"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >STATISTICS</a
+              >
+              <a
+                  href="/ratings"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >RATINGS</a
+              >
+              <a
+                  href="/search"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  >SEARCH <i class="fa fa-search"></i
+              ></a>
+              {% if user.is_authenticated %}
+              <a
+                  href="/account/logout"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >LOGOUT</a
+              >
+              {% else %}
+              <a
+                  href="/account/login"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >SIGN IN</a
+              >
+              <a
+                  href="/account/signup"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >SIGN UP</a
+              >
+              {% endif %}
+          </div>
+        </div>
+
+
+            {%block content%}
+            {%endblock%}
+
+            {%block scripts%}
+            {%endblock scripts%}
+           
+            
+            <script>
+              // Used to toggle the menu on small screens when clicking on the menu button
+              function myFunction() {
+                var x = document.getElementById("navDemo");
+                if (x.className.indexOf("w3-show") == -1) {
+                  x.className += " w3-show";
+                } else {
+                  x.className = x.className.replace(" w3-show", "");
+                }
+              }
+
+              var preloader = document.getElementById("preloading");
+              function loadThePage() {
+                preloader.style.display = "none";
+              }
+            </script>
+    </body>
+</html>

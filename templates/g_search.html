@@ -1,0 +1,91 @@
+{%extends 'government_base.html'%}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+
+<body>
+    {%block content%}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+
+    <link rel="stylesheet" href="{% static 'search.css' %}">
+    <div class="wrapper">
+    <div class="p-2"></div> 
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+     <br> 
+     <div class="jumbotron">
+     <div class="search">
+     <div class="topnav bg-info p-3">
+        <h3 style="float:left;color:white">Search complaints by area or complaint-id</h3>
+
+        <div class="search-container bg-light" style="padding: 10px;">
+          <form action="/government/search" method="POST">
+            {% csrf_token %}
+          <!-- <div class="block" style="color:black;text-align:left; float:left;margin-right:820px;margin-top:10px;font:sans serif"> Search complaints by area or complaint_id</div> -->
+            <input type="text" placeholder="Search here...  " name="querry" id="querry">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        </div>
+        <br>
+     {% if result|length == 0 and request.method == "POST" %}
+      Your search : <b>{{querry}}</b> - did not match any documents.<br>
+     Suggestions :<br>
+     - Try different keywords<br>
+     {% elif  result|length > 0 %}
+     
+     
+    
+    <h4>Showing Results for <b>{{querry}} </b>:</h4>
+    <b>Total complaints : {{size}}</b><br>
+    </div>
+    <br>
+    
+     <table class="table table-borderless" id="search-table">
+        <thead class="border-bottom font-weight-bold" style="color:blueviolet;background-color:black">
+            <tr>
+                 <td>Complaint Id</td>
+                 <td>Problem</td>
+                 <td>Area</td>
+                 <td>Pincode</td>
+                 <td>View complaint</td>
+
+             </tr>
+         </thead>
+         <tbody style="background : linear-gradient(135deg, lightblue 10%, pink 100%);;color:black">
+         {% for item in result %}
+        
+             <tr>
+                 <td>{{item.id}}</td>
+                 <td>{{item.problem}}</td>
+                 <td>{{item.area}}</td>
+                 <td>{{item.pincode}}</td>
+                 <!-- <td>{{item.desciption}}</td> -->
+                 <td>
+                    <a href="{% url 'view_complaint' item.id%}" class="button"
+                    style="text-decoration: none;"
+                        >view here</a
+                    >
+                     <!-- <button class="btn btn-outline-warning">
+                        <a href="{% url 'view_complaint' item.id%}">View Complaint</a>
+                     </button> -->
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     </div>
+     {% else %}
+     <div class="empty" style="margin: 350px 200px 200px 200px;"></div>
+    
+     {% endif %}
+    </div>
+    {%endblock%}
+</body>
+
+</html>

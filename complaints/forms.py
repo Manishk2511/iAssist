@@ -1,11 +1,11 @@
 from django import forms
-from .models import problem, complaint
+from .models import problem, Complaints, image_upload
 
 
 class ComplaintForm(forms.ModelForm):
     class Meta:
-        model = complaint
-        fields = ('problem', 'desciption', 'area', 'pincode')
+        model = Complaints
+        fields = ('problem', 'desciption', 'area', 'pincode', 'image')
         labels = {
             'area': 'Location',
         }
@@ -14,3 +14,9 @@ class ComplaintForm(forms.ModelForm):
         super(ComplaintForm, self).__init__(*args, **kwargs)
         self.fields['problem'].empty_label = "Select"
         self.fields['area'].required = False
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = image_upload
+        fields = ('image',)

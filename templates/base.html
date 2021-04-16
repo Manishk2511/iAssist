@@ -1,96 +1,247 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <link href="{%static 'home.css'%}" rel="stylesheet" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iAssist</title>
-  </head>
+    <head>
+     
+        <meta charset="UTF-8" />  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iAssist</title>
+        
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous"
+        />
 
-  <body class="body-img">
-    <div class="blur">
-      <div class="mx-2 my-2">
-        <div class="container-fluid">
-          <div class="row" style="background-color: rgb(0, 0, 0)">
-            <div class="p-4 mb-4 bg-dark text-white" style="font-size: large">
-              iAssist
+        <link href="{%static 'home.css'%}" rel="stylesheet" /> 
+
+        <link rel="icon" type="image/png" href="{% static 'icons/icon3.jpg' %}"/>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
+        <link rel="stylesheet" href="{% static 'base.css' %}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    </head>
+
+    <script>
+      $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $("a").on("click", function (event) {
+          // Make sure this.hash has a value before overriding default behavior
+          if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+  
+            // Store hash
+            var hash = this.hash;
+  
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $("html, body").animate(
+              {
+                scrollTop: $(hash).offset().top,
+              },
+              800,
+              function () {
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+              }
+            );
+          } // End if
+        });
+      });
+    </script>
+
+
+    <body onload="loadThePage()"> 
+
+        {% comment %} <div id="preloading" style="background: white url('/static/images/preloader1.gif') no-repeat center;"></div> {% endcomment %}
+        <div id="preloading" style="background: white url('/static/images/preloader2.gif') no-repeat center;"></div>
+        {% comment %} <div id="preloading" style="background: #231f20 url('/static/images/preloader3.gif') no-repeat center;"></div> {% endcomment %}
+        {% comment %} <div id="preloading" style="background: #231f20 url('/static/images/preloader4.gif') no-repeat center; background-size: cover;"></div> {% endcomment %}
+     
+        <!-- Navbar -->
+        <div class="w3-top">
+            <div class="w3-bar w3-purple w3-card">
+                <a
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+                    href="javascript:void(0)"
+                    onclick="myFunction()"
+                    title="Toggle Navigation Menu"
+                    ><i class="fa fa-bars"></i
+                ></a>
+                
+                <a href="/" class="w3-bar-item w3-button w3-padding-large"
+                style="text-decoration: none;">HOME</a>
+                {% if request.user.is_staff %} 
+                  <a
+                  href="/government"
+                  class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-deep-purple w3-hover-green"
+                  style="text-decoration: none;"
+                  >GOVERNMENT PANEL</a
+                >
+                {% endif %}
+                
+                <a href="/complaints/list" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >MY COMPLAINTS</a
+                >
+                <a href="/map" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >MAP</a
+                >
+                <a href="/stats" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >STATISTICS</a
+                >
+                <a href="/ratings" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                style="text-decoration: none;"
+                    >RATINGS</a
+                >
+                {% if user.is_authenticated %}
+                <div class="w3-bar-item  w3-padding-large w3-hide-small w3-right">
+                  Welcome <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  {{user.username}}
+                  </div>
+                  <a
+                    href="/account/logout"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    style="text-decoration: none;"
+                    >Logout</a
+                  >
+                
+                {% else %}
+                <a
+                    href="/account/signup"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    style="text-decoration: none;"
+                    >SIGN UP</a
+                >
+                <a
+            w3-hover-green        href="/account/login"
+                    style="text-decoration: none;"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    >SIGN IN</a
+                >
+                {% endif %}
+                
+                <a
+                    href="/search"
+                    class="w3-padding-large w3-hover-red w3-hide-small w3-right"
+                    ><i class="fa fa-search"></i
+                ></a>
             </div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-6 my-3">
-              <ul>
-                {% if value == "home" %}
-                <li><a href="/" class="active">Home</a></li>
-                {%else%}
-                <li><a href="/">Home</a></li>
-                {%endif%} {% if value == "status" %}
-                <li><a href="complaints/list" class="active">Status</a></li>
-                {%else%}
-                <li><a href="complaints/list">Status</a></li>
-                {%endif%} {% if value == "feedback" %}
-                <li><a href="feedback" class="active">Feedback</a></li>
-                {%else%}
-                <li><a href="feedback">Feedback</a></li>
-                {%endif%} {% if value == "stats" %}
-                <li><a href="stats" class="active">Graph</a></li>
-                {%else%}
-                <li><a href="stats">Graph</a></li>
-                {%endif%} {% if value == "ratings" %}
-                <li><a href="ratings" class="active">Ratings</a></li>
-                {%else%}
-                <li><a href="ratings">Ratings</a></li>
-                {%endif%}{% if value == "map" %}
-                <li><a href="map" class="active">Map</a></li>
-                {%else%}
-                <li><a href="map">Map</a></li>
-                {%endif%}
-              </ul>
-            </div>
-            <div class="col-sm-3">
-              <button
-                class="btn btn-secondary"
-                onclick="window.location.href='account/login'"
+        </div>
+            
+        <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+        <div>
+          <div
+          id="navDemo"
+          class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+          style="margin-top: 46px"
+          >
+              
+              <a
+                  href="/complaints/list"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >MY COMPLAINTS</a
               >
-                login
-              </button>
-              <button
-                class="btn btn-secondary"
-                onclick="window.location.href='/account/signup'"
+              <a
+                  href="/map"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >MAP</a
               >
-                sign up
-              </button>
-            </div>
-          </div>
-          <div class="row" style="background-color: rgb(0, 0, 0)">
-            <br />
-          </div>
-          <div class="row" style="background-color: grey">
-            <br />
+              <a
+                  href="/stats"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >STATISTICS</a
+              >
+              <a
+                  href="/ratings"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >RATINGS</a
+              >
+              <a
+                  href="/search"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  >SEARCH <i class="fa fa-search"></i
+              ></a>
+
+              {% if request.user.is_staff %} 
+                    <a
+                    href="/government"
+                    class="w3-bar-item w3-button w3-padding-large"
+                    style="text-decoration: none;"
+                    onclick="myFunction()"
+                    >Government Home</a
+                >
+              {% endif %}
+              {% if user.is_authenticated %}
+              <a
+                  href="/account/logout"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >LOGOUT</a
+              >
+              {% else %}
+              <a
+                  href="/account/login"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >SIGN IN</a
+              >
+              <a
+                  href="/account/signup"
+                  class="w3-bar-item w3-button w3-padding-large"
+                  style="text-decoration: none;"
+                  onclick="myFunction()"
+                  >SIGN UP</a
+              >
+              {% endif %}
           </div>
         </div>
-      </div>
-    </div>
-    {%block content%} {%endblock%}
-    <div class="footer" style="background-color: black">
-      <br />
-      <ul>
-        <li style="color: white">contact :</li>
-        <br />
-        <li style="color: white">email :</li>
-        <br />
-        <li style="color: white">address :</li>
-        <br />
-      </ul>
-      <br />
-      <h4 style="text-align: center; background-color: rgb(5, 65, 110)">
-        WE ASSIST INDIA
-      </h4>
-    </div>
-  </body>
+        
+        <!-- BLOCK -->
+        
+        {%block content%}
+        {% endblock content %}
+
+        <script>
+          // Used to toggle the menu on small screens when clicking on the menu button
+          function myFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+            } else {
+              x.className = x.className.replace(" w3-show", "");
+            }
+          }
+
+          var preloader = document.getElementById("preloading");
+          function loadThePage() {
+            preloader.style.display = "none";
+          }
+        </script>
+
+    </body>
 </html>

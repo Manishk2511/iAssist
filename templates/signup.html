@@ -1,17 +1,60 @@
-{%extends 'base.html'%}
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
-</head>
-
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'signup.css' %}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    </head>
 <body>
-    {%block content%}
-    {%endblock%}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="back"></div>
+<div class="registration-form">
+  <header>
+    <h1>Sign Up</h1>
+    <p>Fill in all informations</p>
+  </header>
+  <form method="post" action="">
+    {%csrf_token%}
+    
+    <div class="input-section firstname-section">
+      <input class="firstname" type="text" placeholder="ENTER YOUR FIRST NAME HERE" autocomplete="off" name="firstname"/>
+      <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button firstname"><i class="fa fa-arrow-up"></i></span></div>
+    </div>
+
+    
+    <div class="input-section lastname-section">
+      <input class="lastname" type="text" placeholder="ENTER YOUR LAST NAME HERE" autocomplete="off" name="lastname"/>
+      <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button lastname"><i class="fa fa-arrow-up"></i></span></div>
+    </div>
+
+    <div class="input-section email-section">
+      <input class="email" type="email" placeholder="ENTER YOUR E-MAIL HERE" autocomplete="off" name="email"/>
+      <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button email"><i class="fa fa-arrow-up"></i></span></div>
+    </div>
+
+    <div class="input-section password-section folded">
+      <input class="password" type="password" placeholder="ENTER YOUR PASSWORD HERE" name="password"/>
+      <div class="animated-button"><span class="icon-lock"><i class="fa fa-lock"></i></span><span class="next-button password"><i class="fa fa-arrow-up"></i></span></div>
+    </div>
+    
+    <div class="input-section repeat-password-section folded">
+      <input class="repeat-password" type="password" placeholder="REPEAT YOUR PASSWORD HERE" name="r_password"/>
+      <div class="animated-button"><span class="icon-repeat-lock"><i class="fa fa-lock"></i></span><span class="next-button repeat-password"><i class="fa fa-paper-plane"></i></span></div>
+    </div>
+    <div class="success"> 
+      <p>ACCOUNT CREATED</p>
+      <input class="login" type="submit" placeholder="Login">
+    </div>
+  </form>
+</div>
 </body>
+<script src="{% static 'signup.js' %}"></script>
 
 </html>

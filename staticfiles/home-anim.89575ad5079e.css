@@ -1,0 +1,82 @@
+/* =Navigation Dots */
+#nav-dots {
+  display: none;
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: right;
+  z-index: 100;
+}
+
+#nav-dots a {
+  display: block;
+  line-height: 25px;
+  position: relative;
+  padding-right: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#nav-dots a:hover .nav-label {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+#nav-dots .nav-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 100%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+#nav-dots .nav-label {
+  display: block;
+  opacity: 0.5;
+  visibility: hidden;
+  -webkit-transform: translateX(-10px);
+  -ms-transform: translateX(-10px);
+  transform: translateX(-10px);
+  -webkit-transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+#nav-dots.is-dark a {
+  color: #212121;
+}
+
+#nav-dots.is-dark .nav-dot {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#nav-dots.is-light a {
+  color: #ffffff;
+}
+
+#nav-dots.is-light .nav-dot {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#nav-dots ul {
+  margin: 0;
+  padding: 0;
+}
+
+#nav-dots li {
+  width: auto;
+  list-style: none;
+}

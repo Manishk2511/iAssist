@@ -1,0 +1,195 @@
+{%extends 'government_base.html' %}
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Statistics - Area wise - iAssist</title>
+    </head>
+    <body>
+        {%block scripts%}
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+   
+        {% block jquery %}
+        <script>
+        // chart 1 complaint stats
+
+        
+
+        // chart 2 solved vs pending
+
+        var endpoint = 'area_chart/data/'
+        var defaultData = [];
+        var labels = [];
+        var labels1= [];
+        var defaultData1= [];
+        $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function(data) {
+                labels = data.labels
+                labels1=data.labels1
+                defaultData = data.default
+                defaultData1=data.default1
+                setChart()  
+                setChart1()
+            },
+            error: function(error_data) {
+                console.log("error")
+                console.log(error_data)
+            }
+        })
+
+        // chart 1 function 
+
+        function setChart() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Complaints received',
+                        data:defaultData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+        // chart 2 function
+
+        function setChart1() {
+            var ctx = document.getElementById('myChart1').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels1,
+                    datasets: [{
+                        label: 'Number of Complaints received',
+                        data:defaultData1,
+                        backgroundColor: [
+                            'rgba(255, 0, 0, 0.4)',
+                            'rgba(0, 255, 0, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        </script>
+        {% endblock jquery %}
+   
+    {%endblock scripts%}
+
+    {%block content%}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <div class="p-4"></div>
+
+    <br>
+    <div class="container-fluid">
+        
+            <div class="jumbotron">
+                Area    : <b>{{area}}</b> <br>
+                Problem : <b>{{problem}}</b>
+                <br>
+                <br>
+                <div class="row">
+                <div class="col md-6">
+                    
+                        <div class="display-5">
+                            Complaints Stats<br>
+                        <hr>
+                        </div>
+                    
+                        <div class="container bg-dark">
+                            <canvas id="myChart" width="400" height="400"></canvas>
+                            </div>
+                </div>
+               <div class="col md-6">
+                    <!-- <div class="jumbotron"> -->
+                        <div class="display-5">
+                            Solved vs Pending <br>
+                           <hr>
+                        </div>
+                    
+                        <div class="container bg-dark">
+                        <canvas id="myChart1" width="400" height="400"></canvas>
+                        </div>
+                </div>
+            </div>
+            <!-- <div class="col sm-6">
+                <div class="col sm-6">
+                    <div class="jumbotron">
+                        <div class="display-4">
+                            Solved vs Pending <br>
+                           <hr>
+                        </div>
+                    
+                    <div class="container bg-dark">
+                        <canvas id="myChart1" width="400" height="400"></canvas>
+                        
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    {%endblock content%}
+</body>
+
+</html>

@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
   <link href="{%static 'home.css'%}" rel="stylesheet" />
@@ -12,147 +13,366 @@
 </head>
 
 <body background="cyan">
+
+  {%block scripts%}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+  {% block jquery %}
+  <script>
+  // chart 1 complaint stats
+
+  
+
+  // chart 2 solved vs pending
+
+  var endpoint = 'government/complaint_stats/chart/data/'
+  var defaultData = [];
+  var labels = [];
+  var labels1= [];
+  var defaultData1= [];
+  $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data) {
+          labels = data.labels
+          labels1=data.labels1
+          defaultData = data.default
+          defaultData1=data.default1
+          setChart()  
+          setChart1()
+      },
+      error: function(error_data) {
+          console.log("error")
+          console.log(error_data)
+      }
+  })
+
+  // chart 1 function 
+
+  function setChart() {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: 'Number of Complaints received',
+                  data:defaultData,
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+  }
+  // chart 2 function
+
+  function setChart1() {
+      var ctx = document.getElementById('myChart1').getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: labels1,
+              datasets: [{
+                  label: 'Number of Complaints received',
+                  data:defaultData1,
+                  backgroundColor: [
+                      'rgba(255, 0, 0, 0.4)',
+                      'rgba(0, 255, 0, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+  }
+
+  </script>
+  {% endblock jquery %}
+
+{%endblock scripts%}
+
   {%block content%}
-  <div class="container-fluid">
-    <div class="home">
-      <!-- <div class="container-fluid"> -->
+
+
+
+
+
+
+
+  <div class ="container" style="background-color:#fc0" id="container">
+
+  <div class="content-wrapper" >
+  <div class="row">
+    <div class="col-md-6" >
       <br>
-      <br>
-      <div class="row">
-        <div class="col-sm-5">
-          <div class="problems" style="display: block; background-color:rgb(114, 230, 114)">
-            <h3 style="display:list-item;">Frequently Registered Complaints</h3>
-            <br>
-            <br>
-            <br>
+    <div class="jumbotron" id="jumbotron">
+      
+      <div class="recent">
+      <h1 style="color:white" id="heading0">Complaints genre</h1>
+    </div>
+    <div class="portfolio-items-wrapper" >
+      
+      <div class="portfolio-item-wrapper ">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'ed1.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/quip.png" alt="">
           </div>
+
+          <div class="subtitle">Education</div>
         </div>
-        <div class="col-sm-2">
-          <ul>
-            <li>
-              <a href="complaints" class="zoom">
-                <img src="{%static 'hp2.png'%}" height="120px" width="120px" />
-              </a>
-            </li>
-          </ul>
-          <br />
-          <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 10px;
-        padding:8px">Hospital</h4>
-        </div>
-        <div class="col-sm-2 ">
-          <ul>
-            <li>
-              <a href="complaints" class="zoom">
-                <img src="{%static 'gbg1.png'%}" height="120px" width="120px" />
-              </a>
-            </li>
-          </ul>
-          <br />
-          <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 10px;
-        padding:8px">Garbage</h4>
-        </div>
-        <div class="col-sm-2">
-          <ul>
-            <li>
-              <a href="complaints" class="zoom">
-                <img src="{%static 'rd1.png'%}" height="120px" width="120px" />
-              </a>
-            </li>
-          </ul>
-          <br />
-          <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 25px;
-        padding:8px">Road</h4>
-        </div>
+        </a>
       </div>
+
+      <div class="portfolio-item-wrapper">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'gbg1.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/devcamp.png" alt="">
+          </div>
+
+          <div class="subtitle">Garbage</div>
+        </div>
+        </a>
+      </div>
+
+      <div class="portfolio-item-wrapper">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'hp2.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/eventbrite.png" alt="">
+          </div>
+
+          <div class="subtitle">Hospital</div>
+        </div>
+        </a>
+      </div>
+
+      <div class="portfolio-item-wrapper">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'rd1.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/shop-hacker.png" alt="">
+          </div>
+
+          <div class="subtitle">Road</div>
+        </div>
+        </a>
+      </div>
+
+      <div class="portfolio-item-wrapper">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'wt1.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/crondose.png" alt="">
+          </div>
+
+          <div class="subtitle">Water</div>
+        </div>
+        </a>
+      </div>
+
+      <div class="portfolio-item-wrapper">
+        <div class="portfolio-img-background" style="background-image:url('{% static 'el1.png' %}')"></div>
+        <a href="complaints">
+        <div class="img-text-wrapper">
+          <div class="logo-wrapper">
+            <img src="images/logos/dailysmarty.png" alt="">
+          </div>
+          <div class="subtitle" >Electricity</div>
+        </div>
+      </a>
+      </div>
+   
+</div>
+
+</div>
+
+  </div>
+
+  
+
+    <!-- <div class=" row">
+      
       <br />
-      <div class="row"><br /></div>
+      <br />
+      <br />
+</div>
+</div>
+<div class="counter">
+<div class="container">
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="customer">
+      <p class="counter-count">1702</p>
+      <p class="customer-p">complaints</p>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="design">
+      <p class="counter-count">1050</p>
+      <p class="design-p">Solved</p>
+    </div>
+  </div>
+
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+    <div class="order">
+      <p class="counter-count">652</p>
+      <p class="order-p">Pending</p>
+    </div>
+  </div>
+</div>
+</div> -->
+
+<div class="col md-6">
+  <div class="jumbotron" style="margin:10px 10px;" id="jumbotron1">
+    <div class="display-4" ><h2 class="header-1 text-center" id="heading" style="color:white">About iAssist</h2></div>
+    <img src="{% static 'ahmedabad1.png' %} " height=300px width=300px>
+    <p id="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore earum quia at nostrum esse dolores sapiente! Nihil sapiente veritatis molestiae, perspiciatis fuga architecto quo facilis aspernatur hic facere cupiditate explicabo ipsa modi vitae animi expedita dolore! Minima adipisci iure vel similique sint, eveniet asperiores pariatur, rerum dignissimos necessitatibus, expedita ipsum. Ab corrupti voluptas molestias dolorum quod odio reprehenderit magnam ut quo. Dignissimos aliquid tempora esse fugit provident autem architecto aut nemo tenetur earum, et tempore beatae ipsam exercitationem error iste reiciendis saepe eaque a laboriosam rerum voluptas velit mollitia? Quam quisquam molestias hic quae repudiandae consectetur facere earum consequuntur nihil?
+    </p>
+    </div>
+
+    
+</div>
+
+</div>
+
+<h2 class="header-1 text-center" style="padding: 60px;
+text-align: center;
+background: #1abc9c;
+color: white;
+font-size: 30px;" id="stats">COMPLAINTS ANALYSIS &nbsp; <i class="fa fa-line-chart" aria-hidden="true"></i>
+</h2>
+
+<!-- starts here -->
+<div class="row">   
+  <div class="jumbotron" id="jumbotron2">
       <div class="row">
-        <div class="col-sm-5"></div>
-        <div class="col-sm-2">
-          <ul>
-            <li>
-              <a href="complaints" class="zoom">
-                <img src="{%static 'wt1.png'%}" height="120px" width="120px" />
-              </a>
-            </li>
-          </ul>
-          <br />
-          <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 20px;
-        padding:8px"">Water</h4>
-      </div>
-      <div class=" col-sm-2">
-            <ul>
-              <li>
-                <a href="complaints" class="zoom">
-                  <img src="{%static 'el1.png'%}" height="120px" width="120px" />
-                </a>
-              </li>
-            </ul>
-            <br />
-            <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 10px;
-        padding:8px"">Electricity</h4>
-      </div>
-      <div class=" col-sm-2">
-              <ul>
-                <li>
-                  <a href="complaints" class="zoom">
-                    <img src="{%static 'ed1.png'%}" height="120px" width="120px" />
-                  </a>
-                </li>
-              </ul>
-              <br />
-              <h4 style="display: block; background-color:rgb(243, 120, 71); color:white; text-align:center
-        ;width:max-content;
-        margin:0px 0px 0px 10px;
-        padding:8px"">Education</h4>
-      </div>
-      <!-- </div> -->
-    </div>
-    <div class=" row">
-                <br />
-                <br />
-                <br />
-        </div>
-      </div>
-      <div class="counter">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-              <div class="customer">
-                <p class="counter-count">1702</p>
-                <p class="customer-p">complaints</p>
+      <div class="col md-6">
+          
+              <div class="display-5">
+                  Complaints Stats<br>
+              <hr>
               </div>
-            </div>
-
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-              <div class="design">
-                <p class="counter-count">1050</p>
-                <p class="design-p">Solved</p>
+          
+              <div class="container bg-dark">
+                  <canvas id="myChart" width="400" height="400"></canvas>
+                  </div>
+      </div>
+     <div class="col md-6">
+          <!-- <div class="jumbotron"> -->
+              <div class="display-5">
+                  Solved vs Pending <br>
+                 <hr>
               </div>
-            </div>
-
-            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-              <div class="order">
-                <p class="counter-count">652</p>
-                <p class="order-p">Pending</p>
+          
+              <div class="container bg-dark">
+              <canvas id="myChart1" width="400" height="400"></canvas>
               </div>
-            </div>
+      </div>
+  </div>
+  <!-- <div class="col sm-6">
+      <div class="col sm-6">
+          <div class="jumbotron">
+              <div class="display-4">
+                  Solved vs Pending <br>
+                 <hr>
+              </div>
+          
+          <div class="container bg-dark">
+              <canvas id="myChart1" width="400" height="400"></canvas>
+              
           </div>
-        </div>
-
       </div>
-    </div>
+  </div> -->
+</div>
+
+
+ <!-- ends here -->
+
+
+</div>
+
+</div>
+
+</div>  
+
+
+
+
+
+
+
+
+    <script>
+      const portfolioItems = document.querySelectorAll('.portfolio-item-wrapper');
+    
+      portfolioItems.forEach(portfolioItem => {
+        portfolioItem.addEventListener('mouseover', () => {
+          console.log(portfolioItem.childNodes[1].classList)
+          portfolioItem.childNodes[1].classList.add('image-blur');
+        });
+    
+        portfolioItem.addEventListener('mouseout', () => {
+          console.log(portfolioItem.childNodes[1].classList)
+          portfolioItem.childNodes[1].classList.remove('image-blur');
+        });
+      });
+    
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -165,7 +385,50 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"></script>
     <script src="{% static 'home.js'%}"></script>
-
+      <script>
+        var body=document.getElementById("body")
+        var jumbotron=document.getElementById("jumbotron")
+        var jumbotron1=document.getElementById("jumbotron1")
+        var jumbotron2=document.getElementById("jumbotron2")
+        var heading=document.getElementById("heading")
+        var heading0=document.getElementById("heading0")
+        var para=document.getElementById("para")
+        var toggle=document.getElementById("toggle");
+        var container=document.getElementById("container")
+        var stats=document.getElementById("stats")
+        toggle.addEventListener("click",darkmode);
+        var flag=true;
+        function darkmode(){
+          if(flag){
+            toggle.innerHTML='Light Mode'
+            body.style.backgroundColor = "black";
+            jumbotron.style.backgroundColor = "rgb(125, 0, 255)";
+            jumbotron1.style.backgroundColor = "rgb(125, 0, 255)";
+            jumbotron2.style.backgroundColor = "rgb(150, 240, 120)";
+            container.style.backgroundColor = "rgb(25, 25, 50)";
+            stats.style.backgroundColor = "rgb(25, 25, 50)";
+            heading.style.color = "white";
+            heading0.style.color = "white";
+            para.style.color = "white";
+            body.style.color="white"
+            flag=false; 
+          }
+          else{
+            toggle.innerHTML='Dark Mode'
+            body.style.backgroundColor = "white";
+            jumbotron.style.backgroundColor = "white";
+            jumbotron1.style.backgroundColor = "white";
+            jumbotron2.style.backgroundColor = "white";
+            container.style.backgroundColor = "grey";
+            stats.style.backgroundColor = "grey";
+            heading0.style.color = "black";
+            heading.style.color = "black";
+            para.style.color = "black";
+            body.style.color="black"
+            flag=true;
+          }
+        }
+      </script>
     {% endblock %}
 </body>
 

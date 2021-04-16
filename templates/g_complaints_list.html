@@ -1,0 +1,181 @@
+{% extends 'government_base.html'%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous"
+        />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>Complaint List - iAssist</title>
+  </head>
+
+  <body>
+    {%block content%}
+    <link rel="stylesheet" href="{% static 'home.css'%}">
+
+    <style>
+      .basic {
+        width: 200px;
+        height: 200px;
+        background: rgba(255,255,255,0.4);
+        position: relative;
+      }
+      .blur {
+        position: absolute;
+        bottom: 25px;
+        right: 162px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255,255,255,0.4);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+    </style>
+
+    <div class="p-4"></div>
+    <div class="container" style="color:white">
+      <div class="col-md-10 offset-1 mt-5">
+        <div class="jumbotron bg-dark">
+          <h1 class="display-4">Complaints list</h1>
+          <table class="table" style="color:white">
+            <thead class="border-bottom font-weight-bold">
+              <tr>
+                <td>Complaint Id</td>
+                <td>Problem</td>
+                <!-- <td>Description</td> -->
+                <td>Area</td>
+                <td>Pincode</td>
+                <td>Status</td>
+                <td>
+                  <a href="{% url 'complaint_insert'%}" class="btn btn-outline-success"
+                    >Add New</a
+                  >
+                </td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for complaint in complaints_list%}
+              <tr>
+                <td>{{complaint.id}}</td>
+                <td>{{complaint.problem}}</td>
+                <!-- <td>{{complaint.desciption}}</td> -->
+                <td>{{complaint.area}}</td>
+                <td>{{complaint.pincode}}</td>
+                {%for Status in status_list%}
+                  {%if Status.complaint_id == complaint.id %}
+                    <td style="color:darkcyan">{{Status.status}}</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="dropbtn">options</button>
+                        <div class="dropdown-content">
+                          {% if Status.status == done %}
+                          <a href="{% url 'g_track_complaint' complaint.id%}">Track Complaint</a>
+                          <a href="{% url 'g_view_complaint' complaint.id%}">View Complaint</a>
+                          {% else %}
+                          <a href="{% url 'g_status_choice' complaint.id%}">Change Status</a>
+                          <a href="{% url 'g_track_complaint' complaint.id%}">Track Complaint</a>
+                          <a href="{% url 'g_view_complaint' complaint.id%}">View Complaint</a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </td>
+                  {%endif%}
+                {%endfor%}
+                <!-- </td> -->
+                <!-- <td>
+                <div class="dropdown">
+                  <button class="dropbtn">options</button>
+                  <div class="dropdown-content">
+                    <a href="{% url 'complaint_update' complaint.id%}">Edit</a>
+                    <a href="{% url 'complaint_delete' complaint.id %}">Delete</a>
+                    <a href="{% url 'status_choice' complaint.id%}">Change Status</a>
+                    <a href="{% url 'track_complaint' complaint.id%}">Track Complaint</a>
+                    <a href="{% url 'view_complaint' complaint.id%}">View Complaint</a>
+                  </div>
+                </div>
+              </td> -->
+                <!-- <td>
+                  <a
+                    href="{% url 'complaint_update' complaint.id%}"
+                    class="btn btn-outline-secondary btn-sm"
+                  >
+                    Edit
+                  </a>
+                  <form
+                    action="{% url 'complaint_delete' complaint.id %}"
+                    method="post"
+                    class="d-inline"
+                  >
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                  </form>
+                  <a href="{% url 'status_choice' complaint.id%}" class="btn btn-outline-warning btn-sm">
+                    change status
+                  </a>
+                </td> -->
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <hr class="my-4" />
+          <div class="my-3">
+            {% if prev %}
+            <!-- <a
+                    href="/complaints/list?pageno={{prev}}"
+                    class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+                    style="text-decoration: none;"
+                    >&laquo; Previous</a
+              > -->
+            <button class="btn btn-outline-info"><a href="/government/g_complaints?pageno={{prev}}" >&laquo; Previous</a></button>
+            {% else %}
+            <!-- <a
+            href="#"
+            class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green"
+            style="text-decoration: none;"
+            >&laquo; Previous</a
+            > -->
+            <button class="btn btn-outline-info"><a href="#" >&laquo; Previous</a></button>
+            {%endif%}
+            
+            <button class="btn btn-outline-info">Page {{page}}</button>
+            {% if next %}
+            <!-- <a
+            href="/complaints/list?pageno={{next}}"
+            class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green float-right"
+            style="text-decoration: none;"
+            >Next &raquo;</a
+            > -->
+            <button class="btn btn-outline-info float-right"><a href="/government/g_complaints?pageno={{next}}" > Next &raquo;</a></button>
+            {% else %}
+            <!-- <a
+            href="#"
+            class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right w3-hover-green float-right "
+            style="text-decoration: none;"
+            >Next &raquo;</a
+            > -->
+            <button class="btn btn-outline-info float-right"><a href="#" > Next &raquo;</a></button>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="basic">
+      <div class="blur">
+        
+      </div>
+    </div>
+  
+    {%endblock%}
+  </body>
+</html>

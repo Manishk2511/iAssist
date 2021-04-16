@@ -1,3 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
+class User(AbstractUser):
+    city = models.CharField(max_length=40)
+    state = models.CharField(max_length=40)
+    area = models.CharField(max_length=40)
+    contact_no = models.CharField(max_length=14)

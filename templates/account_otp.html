@@ -1,0 +1,150 @@
+{%load static%}
+{% load crispy_forms_tags%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% comment %} <link href="{%static 'home.css' %}" rel="stylesheet" /> {% endcomment %}
+        <link href="{%static 'account-otp.css' %}" rel="stylesheet" />
+        {% comment %} <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
+   <script>
+      function clickEvent(first, last) {
+        if (first.value.length) {
+          document.getElementById(last).focus();
+        }
+      }
+    </script>
+    <title>OTP Verification - iAssist</title>
+  </head>
+
+  <body>
+
+<div class="wrapper">
+      <h1
+        style="
+          color: white;
+          background: linear-gradient(135deg, #4056a1 10%, #950740 100%);
+          border-radius: 10px;
+        "
+      >
+        OTP Verification
+      </h1>
+     
+      <div class="container">
+        
+        <h2 id="successfully-sent">
+          OTP has been sent to <span id="number">{{request.user.contact_no}}</span>
+        </h2>
+        {% if messages %}
+        <!-- <ul class="messages"> -->
+          {% for message in messages %}
+          {{ message }} 
+          {% endfor %}
+        <!-- </ul> -->
+        <br>
+        {% endif %}
+        <h3>To proceed, please Enter OTP here:</h3>
+      <form action="/account/otp" method="POST">
+        {%csrf_token%}
+        <div class="userInput">
+          <input
+            name='first'
+            type="text"
+            id="ist"
+            maxlength="1"
+            onkeyup="clickEvent(this,'sec')"
+          />
+          <input
+            name='second'
+            type="text"
+            id="sec"
+            maxlength="1"
+            onkeyup="clickEvent(this,'third')"
+          />
+          <input
+          name='third'
+            type="text"
+            id="third"
+            maxlength="1"
+            onkeyup="clickEvent(this,'fourth')"
+          />
+          <input
+          name='fourth'
+            type="text"
+            id="fourth"
+            maxlength="1"
+            onkeyup="clickEvent(this,'fifth')"
+          />
+          <input name='fifth' type="text" id="fifth" maxlength="1" />
+        </div>
+        <div class="buttons">
+          <button id="verify-button" type="submit">VERIFY</button>
+        </div>
+        </form>
+        <div class="buttons">
+        <button id="resend-button" onclick="document.location='/account/otp'">RESEND CODE</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- {%block content%}  -->
+   
+      <!-- <div class="container-fluid">
+        <div class="jumbotron bg-dark" style="color:white;padding:20px 20px 20px 20px;margin:100px 20px 20px 20px">
+            <h2  style="text-align:center;margin:20px 0px 50px 0px">Please enter the otp received on your phone number : {{request.user.contact_no}}</h2>
+
+          <form action="" method="post">
+              {% csrf_token %}
+            <div id="div_id_email" class="control-group">
+                <label for="otp" class="control-label" >Enter OTP</label>
+                <div class="controls" style="margin-right:650px;padding-right:400px;">
+                  <input class="form-control"   id="otp" maxlength="10" name="otp" required="required" type="otp" />
+                  <a href="/account/otp" onclick="Count()">Resend otp</a>
+                  <div id="resend"></div>
+                </div>
+              </div>
+              <br>
+             
+              <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+          <br>
+          {% if messages %}
+          <ul class="messages" style="color:red">
+              {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>    
+      <button onclick="myFunction()">Click me</button>
+
+    <p id="demo"></p> -->
+    <!-- {%endblock%} -->
+
+    <script>
+      var count = 0;
+      function myFunction() {
+
+        document.getElementById("demo").innerHTML = ++count;
+      }
+              
+      var count=0;
+      var resend=document.getElementById('resend')
+      
+      function Count(){
+        if(count>3){
+          resend.innerHTML='limit exceeded'
+        }
+      }
+    </script>
+  </body>
+</html>

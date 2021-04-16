@@ -1,0 +1,39 @@
+{%extends 'government_base.html'%} {%load static%}
+{% load crispy_forms_tags%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status</title>
+  </head>
+
+  <body>
+    {%block content%} 
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <div class="p-4"></div>
+    <br>
+      <div class="container-fluid">
+        <div class="jumbotron bg-dark " style="padding:100px;margin:200px;margin-top:30px;color:white;
+        background:linear-gradient(145deg,#0000fd88,rgba(0, 0, 0, 0.212),rgba(128, 128, 128, 0.233))">
+          <div class="display-4" style="margin-left:150px">Choose option</div>
+          <hr>
+          <div class="form">
+            <form action="{% url 'g_status_choice' id%}" method="POST" >
+              {%csrf_token%}
+              <br>
+              <div style="margin-right:250px;margin-left:240px">{{form.status|as_crispy_field}}</div>
+              <br>
+              <input type="submit" class="btn btn-outline-info" style="margin-right:350px;margin-left:310px;margin-top:20px">
+
+            </form>
+          </div>
+        </div>
+      </div>
+    {%endblock%}
+  </body>
+</html>
+
+
+
+

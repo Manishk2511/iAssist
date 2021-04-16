@@ -5,3 +5,7 @@ from . import views
 
 def map(request):
     return render(request, 'map.html', {'value': "map"})
+
+
+def map_first(request):
+    return render(request, 'map.html')

@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, lightblue 10%, pink 100%);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  text-align: center;
+  color: honeydew;
+  margin: 3vmin;
+}
+
+.container {
+  border-radius: 3vmax;
+  padding: 3vmin;
+  width: auto;
+  overflow: hidden;
+  background: linear-gradient(135deg, #950740 10%, #4056a1 100%);
+  box-shadow: 10px 10px 20px black;
+  transition: 0.5s ease-in-out;
+}
+
+.container:hover {
+  transform: scale(1.35);
+  box-shadow: 10px 10px 50px black;
+}
+
+.userInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin: 10px;
+  height: 35px;
+  width: 65px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.1rem;
+  background: #eef2f3;
+  border: solid 1px #ccc;
+  box-shadow: 0 0 5px #ccc inset;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+input:focus {
+  border-color: purple;
+  box-shadow: 0 0 5px purple inset;
+}
+
+#successfully-sent {
+  background-color: green;
+  border-radius: 10px;
+}
+
+#number {
+  font-style: italic;
+  color: wheat;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+button {
+  width: 150px;
+  height: 40px;
+  margin: 25px auto 0px auto;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  outline: none;
+  font-weight: 600;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#verify-button,
+#verify-button:active {
+  color: white;
+  background-color: green;
+}
+
+#verify-button:hover {
+  background-color: darkgreen;
+}
+
+#resend-button,
+#resend-button:active {
+  background-color: lightseagreen;
+  color: white;
+}
+
+#resend-button:hover {
+  background-color: teal;
+}

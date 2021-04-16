@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <title>Home - iAssist</title>
+  <meta charset="UTF-8" />
+
+  <body>
+    
+    {% block content %}
+    <!-- HEADER -->
+    <header>
+      <div class="header">
+        <h1>iAssist</h1>
+        <h3>
+          An intermediatry between government and citizens about complaints.
+        </h3>
+        <p>We're here to listen to your complaint and help you out.</p>
+        <br />
+        <a href="#goal" class="button-style-1"  style="text-decoration: none;color: inherit;">READ MORE</a>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <div class="w3-content" style="max-width: 2000px; margin-top: 46px">
+
+      <!-- The Goal Section -->
+      <div
+        class="w3-container w3-content w3-center w3-padding-64"
+        style="max-width: 800px"
+        id="goal"
+      >
+        <h2 class="w3-wide">GOAL</h2>
+        <p class="w3-justify w3-padding-large">
+          Provide citizens an online platform to share their problems and get their problems solved on time. 
+          Reduces gap between citizens and government.
+          Information about complaint status or complaint progress.
+          A public visualization for the number of problems occurring per city.
+          </p>
+      </div>
+
+      <!-- Complaint Section -->
+      
+      <div
+        class="w3-black parralax"
+        style="background-image: url('/static/images/slider2-dark.jpg');"
+      >
+        <div class="w3-row w3-padding-64" id="complaint-section">
+          <div class="w3-center w3-col m6 w3-padding-large w3-hide-small">
+            <img
+              src="{% static 'svgs/complain.svg'%}"
+              class="w3-round w3-margin-bottom"
+              alt="I have a complaint"
+              style="width: 30%"
+            />
+          </div>
+
+          <div class="w3-col m6 w3-padding-large w3-center">
+            <h1><b>HAVE A COMPLAINT?</b></h1>
+            <h5><b>We're here to help you out.</b></h5>
+            <br />
+            <a href="/complaints" class="button-style-1" style="text-decoration: none; color: inherit;">I have a complaint</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Benifits Section -->
+      <div
+        class="w3-container w3-content w3-center w3-padding-64"
+        style="max-width: 800px"
+        id="goal"
+      >
+      <div class="w3-row w3-padding-32">
+          <h2 class="w3-wide">Benefits</h2>
+          <div class="w3-third">
+            <img
+              src="{% static 'svgs/easy-to-use.svg' %}"
+              class="w3-round w3-margin-bottom"
+              alt="Random Name"
+              style="width: 30%"
+            />
+            <h4>Ease of reporting</h4>
+            <p>
+              Just a few clicks and your complaint will be sent to the
+              government.
+            </p>
+          </div>
+          <div class="w3-third">
+            <img
+              src="{% static 'svgs/notification.svg' %}"
+              class="w3-round w3-margin-bottom"
+              style="width: 30%"
+            />
+            <h4>Complaint Status Updates</h4>
+            <p>Get every update about your complaint.</p>
+          </div>
+          <div class="w3-third">
+            <img
+              src="{% static 'svgs/map.svg'%}"
+              class="w3-round w3-margin-bottom"
+              style="width: 30%"
+            />
+            <h4>Complaints on Map</h4>
+            <p>You can see every lodged complaint on the map.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Map Section -->
+      <div
+        class="w3-black parralax"
+        style="background-image: url('static/images/map-dark.jpg')"
+      >
+        <div class="w3-row w3-padding-64" id="map-section">
+          <div class="w3-center m6 w3-padding-large w3-hide-small">
+            <img
+              src="{% static 'svgs/world.svg'%}"
+              class="w3-round w3-margin-bottom"
+              alt="World"
+              style="width: 10%"
+            />
+          </div>
+
+          <div class="m6 w3-center">
+            <h1><b>COMPLAINT ON MAP</b></h1>
+            <h5>
+              <b
+                >See every registered complaint from anywhere around the
+                world.</b
+              >
+            </h5>
+            <br />
+            <a href="/map" class="button-style-1" style="text-decoration:none;color: inherit;">CHECK MAP</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- The Contact Section -->
+      <div
+        class="w3-container w3-content w3-padding-64"
+        style="max-width: 800px"
+        id="contact"
+      >
+        <h2 class="w3-wide w3-center">CONTACT</h2>
+        <p class="w3-opacity w3-center"><i>querry? Drop it here!</i></p>
+        <div class="w3-row w3-padding-32">
+          <div class="w3-col m6 w3-large w3-margin-bottom">
+            <i class="fa fa-map-marker" style="width: 30px"></i> Ahmedabad,Gujarat,India<br />
+            <i class="fa fa-phone" style="width: 30px"></i> Phone: +911234567890<br />
+            <i class="fa fa-envelope" style="width: 30px"> </i> Email:
+            iAssist@mail.com<br />
+          </div>
+          <div class="w3-col m6">
+            <form action="/action_page.php" target="_blank">
+              <div class="w3-row-padding" style="margin: 0 -16px 8px -16px">
+                <div class="w3-half">
+                  <input
+                    class="w3-input w3-border"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    name="Name"
+                  />
+                </div>
+                <div class="w3-half">
+                  <input
+                    class="w3-input w3-border"
+                    type="text"
+                    placeholder="Email"
+                    required
+                    name="Email"
+                  />
+                </div>
+              </div>
+              <input
+                class="w3-input w3-border"
+                type="text"
+                placeholder="Message"
+                required
+                name="Message"
+              />
+              <button
+                class="w3-button w3-black w3-section w3-right"
+                type="submit"
+              >
+                SEND
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- End Page Content -->
+    </div>
+
+    
+    {% endblock %}
+  </body>
+</html>
